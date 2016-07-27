@@ -11,8 +11,15 @@ require 'faker'
 #   User.create(email: Faker::Internet.email)
 # end
 
+# 10.times do
+#   # ShortenedURL.create(long_url: Faker::Internet.url, user_id: (rand * 20).round)
+#   r = User.all.length * rand
+#   ShortenedURL.create_for_user_and_long_url!(User.all[r].email, Faker::Internet.url)
+# end
+
 10.times do
   # ShortenedURL.create(long_url: Faker::Internet.url, user_id: (rand * 20).round)
-  r = User.all.length * rand
-  ShortenedURL.create_for_user_and_long_url!(User.all[r].email, Faker::Internet.url)
+  r = (User.all.length * rand)
+  u = (ShortenedURL.all.length * rand)
+  Visit.record_visit!(User.all[r].email, ShortenedURL.all[u].short_url)
 end
